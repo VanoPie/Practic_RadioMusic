@@ -1,0 +1,111 @@
+create table "Пользователи"
+(
+    id                  integer not null
+        primary key,
+    "Имя"               varchar(50),
+    "Фамилия"           varchar(50),
+    "Электронная_почта" varchar(100),
+    "Телефон"           varchar(20)
+);
+
+alter table "Пользователи"
+    owner to postgres;
+
+create table "Ведущие_радио"
+(
+    id              integer not null
+        primary key,
+    "Имя"           varchar(50),
+    "Фамилия"       varchar(50),
+    "Программа"     varchar(100),
+    "График_работы" varchar(100)
+);
+
+alter table "Ведущие_радио"
+    owner to postgres;
+
+create table "Расписание_вещания"
+(
+    id                   integer not null
+        primary key,
+    "Название_программы" varchar(100),
+    "Ведущий_программы"  integer
+        constraint "Расписание_веща_Ведущий_програ_fkey"
+            references "Ведущие_радио",
+    "День_недели"        varchar(20),
+    "Время_начала"       time,
+    "Время_окончания"    time
+);
+
+alter table "Расписание_вещания"
+    owner to postgres;
+
+create table "Плейлисты"
+(
+    id              integer not null
+        primary key,
+    "Название"      varchar(100),
+    "Описание"      text,
+    "Автор"         integer
+        references "Ведущие_радио",
+    "Дата_создания" date
+);
+
+alter table "Плейлисты"
+    owner to postgres;
+
+create table "Отзывы_слушателей"
+(
+    id             integer not null
+        primary key,
+    "Пользователь" integer
+        references "Пользователи",
+    "Оценка"       integer,
+    "Текст_отзыва" text,
+    "Дата"         date
+);
+
+alter table "Отзывы_слушателей"
+    owner to postgres;
+
+create table "Жанры_музыки"
+(
+    "Название_жанра" varchar(50) not null
+        constraint "Жанры_музыки_pk"
+            primary key,
+    "Описание"       text
+);
+
+alter table "Жанры_музыки"
+    owner to postgres;
+
+create table "Музыка"
+(
+    "Название"    varchar(255) not null
+        primary key,
+    "Исполнитель" varchar(255),
+    "Альбом"      varchar(255),
+    "Жанр"        varchar(255)
+        constraint "Музыка_Жанры_музыки_Название_жанр"
+            references "Жанры_музыки",
+    "Путь"        varchar(255)
+);
+
+alter table "Музыка"
+    owner to postgres;
+
+create table "Запросы_песен"
+(
+    id               integer not null
+        primary key,
+    "Название_песни" varchar(100)
+        constraint "Запросы_песен_Музыка_Название_fk"
+            references "Музыка",
+    "Исполнитель"    varchar(100),
+    "Пользователь"   integer
+        references "Пользователи",
+    "Дата_запроса"   date
+);
+
+alter table "Запросы_песен"
+    owner to postgres;
