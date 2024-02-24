@@ -1,0 +1,39 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="350"
+        x:Class="RadioMusic.AddEditWindow"
+        WindowStartupLocation="CenterScreen"
+        Title="AddEditWindow">
+    <Grid>
+        <UniformGrid Columns="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Margin = "90 10 0 0" FontSize = "20" FontWeight="Bold">Действия с данными</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin = "0 25 0 0">Название: </TextBlock>
+                <TextBox Name="Name" x:CompileBindings="False" Text="{Binding Name}" Width="500" Height="5" Margin = "20 0 0 0" Watermark="Название трека"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin = "0 25 0 0">Исполнитель: </TextBlock>
+                <TextBox Name="Artist" x:CompileBindings="False" Text="{Binding Artist}" Width="500" Height="5" Margin = "10 0 0 0" Watermark="Наименование исполнителя"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin = "0 25 0 0">Альбом: </TextBlock>
+                <TextBox Name="Album" x:CompileBindings="False" Text="{Binding Album}" Width="500" Height="5" Margin = "70 0 0 0" Watermark="Название альбома трека"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin = "0 25 0 0">Жанр: </TextBlock>
+                <TextBox Name="Genre" x:CompileBindings="False" Text="{Binding Genre}" Width="500" Height="5" Margin = "65 0 0 0" Watermark="Жанр трека"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin = "0 25 0 0">Путь: </TextBlock>
+                <TextBox Name="Path" x:CompileBindings="False" Text="{Binding Path}" Width="700" Height="5" Margin = "70 0 0 0" Watermark="Путь к файлу"></TextBox>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Button Name="Save" Content="Сохранить" Click="Save_OnClick"  Margin = "0 15 0 20"></Button>
+                <Button Name="Back" Content="Назад" Click="GoBack_OnClick"  Margin = "165 15 0 20"></Button>
+            </StackPanel>
+        </UniformGrid>
+    </Grid>
+</Window>

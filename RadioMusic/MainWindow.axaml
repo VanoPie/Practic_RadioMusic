@@ -1,0 +1,53 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1500" d:DesignHeight="550"
+        x:Class="RadioMusic.MainWindow"
+        Width="1500"
+        Height="570"
+        WindowStartupLocation="CenterScreen"
+        Title="RadioMusic">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" Margin = "15 10 0 0"> Поиск по наименованию трека: </TextBlock>
+                <TextBox Name="Search_Music" Width="200" Margin ="15 10 0 0" TextChanged="SearchMusic"></TextBox>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center"
+                           x:Name="txtShow" Margin ="15 10 0 0">Фильтрация по исполнителю: </TextBlock>
+                           <ComboBox Name="CmbArtist" 
+                                     x:CompileBindings="False"
+                                     SelectionChanged="Artist_Filter_OnClick" Width="200" Margin ="30 10 0 0">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Artist}"></TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                           </ComboBox>
+                <StackPanel Margin="10 12 0 0">
+                    <Button Name="Reset" Content="Сброс фильтров" Click="Reset_OnClick"></Button>
+                </StackPanel>
+            </StackPanel>
+             
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="SelectFileButton" Margin ="15 10 0 0" Content="Выбрать файл" Click="SelectFileButton_Click" />
+                <Button Name="AddButton" Margin ="15 10 0 0" Content="Ручной ввод" Click="AddData_Click" ></Button>
+                <Button Name="EditButton" Margin ="15 10 0 0" Content="Изменение записи" Click="EditData_Click" ></Button>
+                <Button Name="DeleteButton" Margin ="15 10 0 0" Content="Удалить запись" Click="DeleteData_Click" ></Button>
+            </StackPanel>
+        
+            <DataGrid Name="DataGrid" x:CompileBindings="False" Margin ="15 20 15 30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="400">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Исполнитель" Binding="{Binding Artist}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Альбом" Binding="{Binding Album}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Жанр" Binding="{Binding Genre}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Путь к файлу" Binding="{Binding Path}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Window>
