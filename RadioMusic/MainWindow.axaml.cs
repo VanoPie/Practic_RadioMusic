@@ -27,7 +27,7 @@ public partial class MainWindow : Window
         selectFileButton = this.Get<Button>("SelectFileButton"); //получение кнопки
         _connection = new NpgsqlConnection(connectionString); //создание нового подключения по строке 
         ShowTable(fullTable); //метод отображения таблицы по запросу 
-        FillStatus();
+        FillComboboxArtist();
     }
     
     // Отображение таблицы 
@@ -200,7 +200,7 @@ public partial class MainWindow : Window
         DataGrid.ItemsSource = filteredArtist;
     }
 
-    public void FillStatus()
+    public void FillComboboxArtist()
     {
         mus = new List<MusicClass>();
         _connection = new NpgsqlConnection(connectionString);
@@ -224,8 +224,8 @@ public partial class MainWindow : Window
             }
         }
         _connection.Close();
-        var genderComboBox = this.Find<ComboBox>("CmbArtist");
-        genderComboBox.ItemsSource = mus.DistinctBy(x => x.Artist); //использование метода DistinctBy для удаления дубликатов по полю "Исполнитель"
+        var ArtistComboBox = this.Find<ComboBox>("CmbArtist");
+        ArtistComboBox.ItemsSource = mus.DistinctBy(x => x.Artist); //использование метода DistinctBy для удаления дубликатов по полю "Исполнитель"
     }
     
     // Сброс фильтрации и поиска
